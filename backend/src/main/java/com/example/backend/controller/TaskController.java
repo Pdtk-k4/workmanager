@@ -12,6 +12,7 @@ import com.example.backend.services.TaskService;
 
 @RestController
 @RequestMapping("/api/tasks")
+@CrossOrigin(origins = "http://localhost:5173")
 public class TaskController {
     @Autowired
     private TaskService taskService;

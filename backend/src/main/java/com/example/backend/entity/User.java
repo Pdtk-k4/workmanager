@@ -1,5 +1,7 @@
 package com.example.backend.entity;
 
+import java.util.Set;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -10,7 +12,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
+    @Column(nullable = false, unique = true)
     private String name;
 
     @Column(name = "email", unique = true)
@@ -22,15 +24,20 @@ public class User {
     @Column(name = "avatar_url")
     private String avatar_url;
 
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<UserRole> userRoles;
+
     public User() {
     }
 
-    public User(Long id, String name, String email, String password_hash, String avatar_url) {
+    public User(Long id, String name, String email, String password_hash, String avatar_url, Set<UserRole> userRoles) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.password_hash = password_hash;
         this.avatar_url = avatar_url;
+        this.userRoles = userRoles;
+
     }
 
     public Long getId() {
@@ -71,5 +78,13 @@ public class User {
 
     public void setAvatarUrl(String avatar_url) {
         this.avatar_url = avatar_url;
+    }
+
+    public Set<UserRole> getUserRoles() {
+        return userRoles;
+    }
+
+    public void setUserRoles(Set<UserRole> userRoles) {
+        this.userRoles = userRoles;
     }
 }

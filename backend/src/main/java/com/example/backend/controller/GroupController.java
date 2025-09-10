@@ -14,6 +14,7 @@ import com.example.backend.services.GroupService;
 
 @RestController
 @RequestMapping("/api/groups")
+@CrossOrigin(origins = "http://localhost:5173")
 public class GroupController {
 
     @Autowired

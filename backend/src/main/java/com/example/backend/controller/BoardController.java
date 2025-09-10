@@ -22,7 +22,7 @@ import com.example.backend.services.BoardService;
 
 @RestController
 @RequestMapping("/api/boards")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:5173")
 public class BoardController {
 
     @Autowired
